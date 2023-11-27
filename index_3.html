@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <style>
+    body {
+      margin: 0;
+    }
+    #Pole {
+      background: url(./1803470d39fe26e89fbfdf2c44ea18cd.jpeg) top center / 100%
+        100vh no-repeat;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      width: 100vw;
+      height: 100vh;
+    }
+    #ball {
+      position: absolute;
+      left: 0px;
+      top: 0;
+      width: 100px;
+      height: 100px;
+      transition: all 0.5s;
+    }
+  </style>
+  <body>
+    <div id="Pole">
+      <img src="https://ru.js.cx/clipart/ball.svg" id="ball" />
+    </div>
+
+    <script>
+      Pole.onclick = function () {
+        let PoleCoo = this.getBoundingClientRect();
+        let ballCoo = {
+          top:
+            event.clientY -
+            PoleCoo.top -
+            Pole.clientTop -
+            ball.clientHeight / 2,
+          left:
+            event.clientX -
+            PoleCoo.left -
+            Pole.clientLeft -
+            ball.clientWidth / 2,
+        };
+
+        if (ballCoo.top < 0) ballCoo.top = 0;
+
+        if (ballCoo.left < 0) ballCoo.left = 0;
+
+        if (ballCoo.left + ball.clientWidth > Pole.clientWidth) {
+          ballCoo.left = Pole.clientWidth - ball.clientWidth;
+        }
+
+        if (ballCoo.top + ball.clientHeight > Pole.clientHeight) {
+          ballCoo.top = Pole.clientHeight - ball.clientHeight;
+        }
+
+        ball.style.left = ballCoo.left + "px";
+        ball.style.top = ballCoo.top + "px";
+      };
+    </script>
+  </body>
+</html>
